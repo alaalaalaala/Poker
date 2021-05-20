@@ -1,0 +1,13 @@
+package com.poker.enums;
+
+public enum HandRank {
+	HIGHCARD,
+	PAIR,
+	TWOPAIR, 
+	THREEOFAKIND,
+	STRAIGHT,
+	FLUSH,
+	FULLHOUSE,
+	FOUROFAKIND, 
+	STRAIGHTFLUSH
+}
