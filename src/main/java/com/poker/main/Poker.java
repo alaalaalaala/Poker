@@ -10,7 +10,7 @@ public class Poker {
 	public static void main(String[] args) throws IOException{
 		   HandServiceImpl handServiceImpl= new HandServiceImpl();
 			String blackHandString = "2H 3D 5S 9C KD";
-			String whiteHandString = "2C 3H 4S 8C AH";
+			String whiteHandString = "2C 3H 4S 8C KH";
 			Hand blackHand = new Hand(blackHandString,"Black");
 			Hand whiteHand = new Hand(whiteHandString,"White");
 			String result=handServiceImpl.getwinner(blackHand, whiteHand);

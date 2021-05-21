@@ -12,7 +12,7 @@ public class HandServiceImpl implements HandService {
 	private HandRank handRank;
 
 	@Override
-	public boolean isPair(Card[] cards) {
+	public boolean pair(Card[] cards) {
 		int card1 = cards[0].getValue();
 		int card2 = cards[1].getValue();
 		int card3 = cards[2].getValue();
@@ -26,7 +26,7 @@ public class HandServiceImpl implements HandService {
 	}
 
 	@Override
-	public boolean isTwoPair(Card[] cards) {
+	public boolean twoPair(Card[] cards) {
 		int card1 = cards[0].getValue();
 		int card2 = cards[1].getValue();
 		int card3 = cards[2].getValue();
@@ -39,7 +39,7 @@ public class HandServiceImpl implements HandService {
 	}
 
 	@Override
-	public boolean isThreeOfAKind(Card[] cards) {
+	public boolean threeOfAKind(Card[] cards) {
 		int card1 = cards[0].getValue();
 		int card2 = cards[1].getValue();
 		int card3 = cards[2].getValue();
@@ -50,12 +50,12 @@ public class HandServiceImpl implements HandService {
 	}
 
 	@Override
-	public boolean isStraight(Card[] cards) {
+	public boolean straight(Card[] cards) {
 		return cards[4].getValue() - cards[0].getValue() == 4;
 	}
 
 	@Override
-	public boolean isFlush(Card[] cards) {
+	public boolean flush(Card[] cards) {
 		for (int i=0;i<cards.length-1;i++){
 			if (cards[i+1].getSuit() != cards[i].getSuit()) return false;
 		}
@@ -64,7 +64,7 @@ public class HandServiceImpl implements HandService {
 	}
 
 	@Override
-	public boolean isFullHouse(Card[] cards) {
+	public boolean fullHouse(Card[] cards) {
 		int card1 = cards[0].getValue();
 		int card2 = cards[1].getValue();
 		int card3 = cards[2].getValue();
@@ -76,14 +76,14 @@ public class HandServiceImpl implements HandService {
 	}
 
 	@Override
-	public boolean isFourOfAKind(Card[] cards) {
+	public boolean fourOfAKind(Card[] cards) {
 		return (cards[0].getValue() == cards[3].getValue() ||
 				cards[1].getValue() == cards[4].getValue());
 	}
 
 	@Override
-	public boolean isStraightFlush(Card[] cards) {
-		return isStraight(cards) && isFlush(cards);
+	public boolean straightFlush(Card[] cards) {
+		return straight(cards) && flush(cards);
 	}
 
 	public String getwinner(Hand hand1, Hand hand2){
@@ -112,8 +112,6 @@ public class HandServiceImpl implements HandService {
 				case THREEOFAKIND :
 					cmp = compareThreeOfAKind(hand1).compareTo(compareThreeOfAKind(hand2));
 					break;
-					// **XX-  **-XX  **XX-
-					//
 				case TWOPAIR :
 					cmp = compareTwoPair(hand1,hand2);
 					break;
@@ -131,14 +129,14 @@ public class HandServiceImpl implements HandService {
 	private  HandRank getHandRank(Hand hand) {
 
 		Card[] cards = hand.getHand();
-		if (isStraightFlush(cards)) return handRank.STRAIGHTFLUSH;
-		else if (isFourOfAKind(cards)) return handRank.FOUROFAKIND;
-		else if (isFullHouse(cards)) return handRank.FULLHOUSE;
-		else if (isFlush(cards)) return handRank.FLUSH;
-		else if (isStraight(cards)) return handRank.STRAIGHT;
-		else if (isThreeOfAKind(cards)) return handRank.THREEOFAKIND;
-		else if (isTwoPair(cards)) return handRank.TWOPAIR;
-		else if (isPair(cards)) return handRank.PAIR;
+		if (straightFlush(cards)) return handRank.STRAIGHTFLUSH;
+		else if (fourOfAKind(cards)) return handRank.FOUROFAKIND;
+		else if (fullHouse(cards)) return handRank.FULLHOUSE;
+		else if (flush(cards)) return handRank.FLUSH;
+		else if (straight(cards)) return handRank.STRAIGHT;
+		else if (threeOfAKind(cards)) return handRank.THREEOFAKIND;
+		else if (twoPair(cards)) return handRank.TWOPAIR;
+		else if (pair(cards)) return handRank.PAIR;
 		else return handRank.HIGHCARD;
 	}
 	
@@ -148,18 +146,18 @@ public class HandServiceImpl implements HandService {
 		return hand1Cards[hand1Cards.length-1].compareTo(hand2Cards[hand2Cards.length-1]);
 	}
 	
-	private Card compareFourOfAKind(Hand tempHand){
-		Card[] tempCards = tempHand.getHand();
-		if (tempCards[0] == tempCards[3]) return tempCards[0];
-		else if (tempCards[1] == tempCards[4]) return tempCards[1];
+	private Card compareFourOfAKind(Hand hand){
+		Card[] cards = hand.getHand();
+		if (cards[0] == cards[3]) return cards[0];
+		else if (cards[1] == cards[4]) return cards[1];
 		return null;
 	}
 	
-	private Card compareThreeOfAKind(Hand tempHand){
-		Card[] tempCards = tempHand.getHand();
-		if (tempCards[0] == tempCards[2]) return tempCards[0];
-		else if (tempCards[1] == tempCards[3]) return tempCards[1];
-		else if (tempCards[2] == tempCards[4]) return tempCards[2];
+	private Card compareThreeOfAKind(Hand hand){
+		Card[] cards = hand.getHand();
+		if (cards[0] == cards[2]) return cards[0];
+		else if (cards[1] == cards[3]) return cards[1];
+		else if (cards[2] == cards[4]) return cards[2];
 		return null;
 	}
 

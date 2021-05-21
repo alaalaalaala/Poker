@@ -5,21 +5,21 @@ import com.poker.model.Hand;
 
 public interface HandService {
 	
-	boolean isPair(Card[] cards);
+	boolean pair(Card[] cards);
 	
-	boolean isTwoPair(Card[] cards);
+	boolean twoPair(Card[] cards);
 	
-	boolean isThreeOfAKind(Card[] cards);
+	boolean threeOfAKind(Card[] cards);
 	
-	boolean isStraight(Card[] cards);
+	boolean straight(Card[] cards);
 	
-	boolean isFlush(Card[] cards);
+	boolean flush(Card[] cards);
 	
-	boolean isFullHouse(Card[] cards);
+	boolean fullHouse(Card[] cards);
 	
-	boolean isFourOfAKind(Card[] cards);
+	boolean fourOfAKind(Card[] cards);
 	
-	boolean isStraightFlush(Card[] cards);
+	boolean straightFlush(Card[] cards);
 	
 	public  String getwinner(Hand hand1, Hand hand2);
 	
